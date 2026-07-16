@@ -1,0 +1,176 @@
+{
+  "posts": {
+    "mock_uka295l5s": {
+      "title": "ㅁㄴㅇㅁㅇ",
+      "content": "[[별을 읽는 마술사]]\n[[별을 새기는 마술사]]\n[[별을 읽는 마술사-홀로스코프 매지션]]",
+      "author": "Sinji",
+      "authorId": "admin",
+      "category": "덱 리스트",
+      "tags": [],
+      "likes": 0,
+      "views": 10,
+      "createdAt": "2026-07-16T03:09:27.143Z"
+    }
+  },
+  "comments": {},
+  "settings": {
+    "config": {
+      "blogTitle": "마술사 덱 노트",
+      "logoEmoji": "🃏",
+      "logoImageUrl": "https://images.ygoprodeck.com/images/cards_small/76794549.jpg",
+      "subtitle": "유희왕 마술사 계열 덱 구성, 매치업, 전략을 기록하는 덱 노트"
+    }
+  },
+  "users": {},
+  "likes_log": {
+    "mock_intro_post___1": {
+      "postId": "mock_intro_post",
+      "ip": "::1",
+      "likedAt": "2026-07-15T06:07:25.152Z"
+    },
+    "mock_q3b3bar92___1": {
+      "postId": "mock_q3b3bar92",
+      "ip": "::1",
+      "likedAt": "2026-07-16T02:24:59.390Z"
+    }
+  },
+  "cards_cache": {
+    "Stargazer%20Magician": {
+      "cardData": {
+        "id": 94415058,
+        "name": "Stargazer Magician",
+        "typeline": [
+          "Spellcaster",
+          "Pendulum",
+          "Effect"
+        ],
+        "type": "Pendulum Effect Monster",
+        "humanReadableCardType": "Pendulum Effect Monster",
+        "frameType": "effect_pendulum",
+        "desc": "[ Pendulum Effect ] \nIf a Pendulum Monster you control battles, your opponent cannot activate Spell Cards until the end of the Damage Step. Unless you have a \"Magician\" card or \"Odd-Eyes\" card in your other Pendulum Zone, this card's Pendulum Scale becomes 4.\n\n[ Monster Effect ] \nOnce per turn, when exactly 1 other Pendulum Monster you control (and no other cards) is returned to your hand by an opponent's card effect (except during the Damage Step): You can Special Summon 1 monster from your hand with the same name as that returned to the hand.",
+        "race": "Spellcaster",
+        "pend_desc": "If a Pendulum Monster you control battles, your opponent cannot activate Spell Cards until the end of the Damage Step. Unless you have a \"Magician\" card or \"Odd-Eyes\" card in your other Pendulum Zone, this card's Pendulum Scale becomes 4.",
+        "monster_desc": "Once per turn, when exactly 1 other Pendulum Monster you control (and no other cards) is returned to your hand by an opponent's card effect (except during the Damage Step): You can Special Summon 1 monster from your hand with the same name as that returned to the hand.",
+        "atk": 1200,
+        "def": 2400,
+        "level": 5,
+        "attribute": "DARK",
+        "archetype": "Magician",
+        "scale": 1,
+        "ygoprodeck_url": "https://ygoprodeck.com/card/stargazer-magician-7855",
+        "card_sets": [
+          {
+            "set_name": "Master of Pendulum Structure Deck",
+            "set_code": "SDMP-EN007",
+            "set_rarity": "Common",
+            "set_rarity_code": "(C)",
+            "set_price": "1.23"
+          },
+          {
+            "set_name": "Pendulum Evolution",
+            "set_code": "PEVO-EN011",
+            "set_rarity": "Super Rare",
+            "set_rarity_code": "(SR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Star Pack ARC-V",
+            "set_code": "SP15-EN010",
+            "set_rarity": "Common",
+            "set_rarity_code": "(C)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Star Pack ARC-V",
+            "set_code": "SP15-EN010",
+            "set_rarity": "Shatterfoil Rare",
+            "set_rarity_code": "(SHR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Starter Deck: Yuya",
+            "set_code": "YS16-EN009",
+            "set_rarity": "Common",
+            "set_rarity_code": "(C)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Super Starter: Space-Time Showdown",
+            "set_code": "YS14-EN009",
+            "set_rarity": "Super Rare",
+            "set_rarity_code": "(SR)",
+            "set_price": "0"
+          }
+        ],
+        "card_images": [
+          {
+            "id": 94415058,
+            "image_url": "https://images.ygoprodeck.com/images/cards/94415058.jpg",
+            "image_url_small": "https://images.ygoprodeck.com/images/cards_small/94415058.jpg",
+            "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/94415058.jpg"
+          }
+        ],
+        "card_prices": [
+          {
+            "cardmarket_price": "0.10",
+            "tcgplayer_price": "0.11",
+            "ebay_price": "6.95",
+            "amazon_price": "0.94",
+            "coolstuffinc_price": "0.49"
+          }
+        ]
+      },
+      "lastAccessedAt": 1784171824397
+    },
+    "%EB%B3%84%EC%9D%84%20%EC%83%88%EA%B8%B0%EB%8A%94%20%EB%A7%88%EC%88%A0%EC%82%AC": {
+      "cardData": {
+        "id": 47349116,
+        "name": "Timestar Magician",
+        "typeline": [
+          "Spellcaster",
+          "Xyz",
+          "Effect"
+        ],
+        "type": "XYZ Monster",
+        "humanReadableCardType": "Xyz Effect Monster",
+        "frameType": "xyz",
+        "desc": "2 Level 4 \"Magician\" Pendulum Monsters\r\nMust first be Xyz Summoned with the above Xyz Materials. Once per turn: You can detach 1 Xyz Material from this card; add to your hand, 1 DARK Spellcaster-Type monster from your Deck, Graveyard, or face-up from your Extra Deck. Once per turn, if a Pendulum Monster Card(s) in your Monster Zone or Pendulum Zone would be destroyed by battle or card effect, you can send 1 Spellcaster-Type monster from your Deck to the Graveyard instead.",
+        "race": "Spellcaster",
+        "atk": 2400,
+        "def": 1200,
+        "level": 4,
+        "attribute": "DARK",
+        "ygoprodeck_url": "https://ygoprodeck.com/card/timestar-magician-8323",
+        "card_sets": [
+          {
+            "set_name": "Pendulum Evolution",
+            "set_code": "PEVO-EN009",
+            "set_rarity": "Ultra Rare",
+            "set_rarity_code": "(UR)",
+            "set_price": "1.55"
+          }
+        ],
+        "card_images": [
+          {
+            "id": 47349116,
+            "image_url": "https://images.ygoprodeck.com/images/cards/47349116.jpg",
+            "image_url_small": "https://images.ygoprodeck.com/images/cards_small/47349116.jpg",
+            "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/47349116.jpg"
+          }
+        ],
+        "card_prices": [
+          {
+            "cardmarket_price": "0.49",
+            "tcgplayer_price": "0.35",
+            "ebay_price": "1.97",
+            "amazon_price": "1.00",
+            "coolstuffinc_price": "0.25"
+          }
+        ],
+        "desc_ko": "이 카드는 상기의 카드를 엑시즈 소재로 한 엑시즈 소환으로만 엑스트라 덱에서 특수 소환할 수 있다.①: 1턴에 1번, 이 카드의 엑시즈 소재를 1개 제거하고 발동할 수 있다. 자신의 덱 / 엑스트라 덱(앞면) / 묘지에서 마법사족 / 어둠 속성 몬스터 1장을 패에 넣는다.②: 1턴에 1번, 자신의 몬스터 존 / 펜듈럼 존의 펜듈럼 몬스터 카드가 전투 / 효과로 파괴될 경우, 대신에 자신의 덱에서 마법사족 몬스터 1장을 묘지로 보낼 수 있다.별을 읽는 마술사의 수치를 뒤집은 스테이터스를 갖고 있는 엑시즈 몬스터.①의 효과는 어둠 속성 마법사족 서치 효과. 펜듈럼 에볼루션의 아스트로그래프 매지션, 크로노그래프 매지션의 서치가 가능해졌으며, EM 도크로배트 조커, EM 오드아이즈 디졸버 등도 서치 범위에 걸린다. 덤으로 대상이 펜듈럼 몬스터로 한정되지 않아서 환상의 견습 마도사, <a class='_6dRPS7Gr' href='/w/%EB%94%94%EB%A9%98%EC%85%98%20%EC%96%B4%ED%8A%B8%EB%9E%99%ED%84%B0' title='디멘션 어트랙터' data-v-115d9",
+        "name_ko": "별을 새기는 마술사"
+      },
+      "lastAccessedAt": 1784171827283
+    }
+  }
+}

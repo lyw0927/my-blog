@@ -1,0 +1,164 @@
+@font-face {
+  font-family: 'CookieRun';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'CookieRun';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  /* Dark Mode (Default) */
+  --bg-color: #121316;
+  --bg-gradient: none;
+  --panel-bg: #1a1b20;
+  --panel-border: #262830;
+  --panel-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --text-main: #eceeef;
+  --text-muted: #8e939e;
+  --text-inverse: #121316;
+  
+  --primary: #9ca3af;
+  --primary-glow: rgba(156, 163, 175, 0.15);
+  --secondary: #6b7280;
+  --secondary-glow: rgba(107, 114, 128, 0.15);
+  --accent: #d1d5db;
+  
+  --input-bg: #15161a;
+  --input-border: #262830;
+  --input-focus: #9ca3af;
+  
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  --font-title: 'CookieRun', sans-serif;
+  --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.12s ease;
+}
+
+:root.light-mode {
+  /* Light Mode */
+  --bg-color: #ffffff;
+  --bg-gradient: none;
+  --panel-bg: #f9fafb;
+  --panel-border: #e5e7eb;
+  --panel-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --text-inverse: #ffffff;
+  
+  --primary: #374151;
+  --primary-glow: rgba(55, 65, 81, 0.1);
+  --secondary: #4b5563;
+  --secondary-glow: rgba(75, 85, 99, 0.1);
+  --accent: #1f2937;
+  
+  --input-bg: #ffffff;
+  --input-border: #e5e7eb;
+  --input-focus: #374151;
+  
+  --hover-bg: rgba(0, 0, 0, 0.04);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+/* Solid clean panel base */
+.glass-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
+  border-radius: 12px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--panel-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Standard Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px var(--primary-glow); }
+  50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.6); }
+}
+
+/* Button & Form common styles */
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+.glow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px 0 var(--primary-glow);
+  transition: var(--transition-smooth);
+}
+
+.glow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.5), 0 0 10px var(--secondary-glow);
+}
+
+.glow-btn:active {
+  transform: translateY(0);
+}
+
+.glow-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ─── 전역 이모지 흑백 처리 ─── */
+.emoji-gray {
+  filter: grayscale(1);
+  display: inline-block;
+}

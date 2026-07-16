@@ -1,0 +1,121 @@
+.tooltip {
+  position: absolute;
+  z-index: 9999;
+  width: 360px;
+  padding: 1rem;
+  pointer-events: none; /* 마우스 이벤트를 방해하지 않도록 설정 */
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  animation: tooltipFadeIn 0.15s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.loading, .error {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.error {
+  color: #f87171;
+}
+
+.cardContent {
+  display: flex;
+  gap: 1rem;
+}
+
+.cardImg {
+  width: 90px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--panel-border);
+  flex-shrink: 0;
+}
+
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cardName {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.cardType {
+  background: var(--hover-bg);
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+  border: 1px solid var(--panel-border);
+}
+
+.cardAttribute, .cardLevel, .cardScale {
+  font-weight: 600;
+}
+
+.cardStats {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 0.1rem;
+}
+
+.cardDesc {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.71rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.splitEffects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  border-top: 1px dashed var(--panel-border);
+  padding-top: 0.35rem;
+}
+
+.effectSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.effectLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.effectText {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}

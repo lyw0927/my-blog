@@ -1,0 +1,106 @@
+.markdown {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-main);
+}
+
+.h1 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 2rem 0 1rem;
+  border-bottom: 1px solid var(--panel-border);
+  padding-bottom: 0.5rem;
+}
+
+.h2 {
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 1.75rem 0 1rem;
+}
+
+.h3 {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.p {
+  margin: 0 0 1.25rem 0;
+}
+
+.blockquote {
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem 0.5rem 1.25rem;
+  border-left: 4px solid var(--primary);
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+.blockquote p {
+  margin: 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.ul, .ol {
+  margin: 0 0 1.25rem 0;
+  padding-left: 1.5rem;
+}
+
+.ul li, .ol li {
+  margin-bottom: 0.5rem;
+}
+
+.codeContainer {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--panel-border);
+}
+
+.codeHeader {
+  background: rgba(31, 41, 55, 0.9);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-family: monospace;
+  padding: 0.35rem 1rem;
+  border-bottom: 1px solid var(--panel-border);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pre {
+  margin: 0;
+  padding: 1rem;
+  background: #0f172a;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.925rem;
+}
+
+.pre code {
+  color: #38bdf8; /* light blue */
+}
+
+/* Global markdown element styling using global escape selectors */
+:global(.inline-code) {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--accent);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+:global(.md-link) {
+  color: var(--secondary);
+  border-bottom: 1px dashed var(--secondary);
+}
+
+:global(.md-link:hover) {
+  color: var(--primary);
+  border-bottom-style: solid;
+}

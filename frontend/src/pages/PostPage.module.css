@@ -1,0 +1,219 @@
+.page {
+  width: 92%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 0 4rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.progressBarContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  z-index: 1000;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.1s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.back {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: var(--transition-fast);
+}
+
+.back:hover {
+  color: var(--text-main);
+  background: var(--hover-bg);
+}
+
+.adminActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.editBtn, .deleteBtn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.editBtn {
+  background: var(--hover-bg);
+  border: 1px solid var(--panel-border);
+  color: var(--text-main);
+}
+
+.editBtn:hover {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.deleteBtn {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.deleteBtn:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: #ef4444;
+}
+
+.article {
+  padding: 2.5rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.metaRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.category {
+  color: var(--secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.date {
+  color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.35;
+  margin: 0 0 1.25rem 0;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.authorSection {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.author {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.tag {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--hover-bg);
+  padding: 0.2rem 0.625rem;
+  border-radius: 6px;
+  border: 1px solid var(--panel-border);
+}
+
+.content {
+  margin-bottom: 2.5rem;
+  min-height: 200px;
+}
+
+.feedbackSection {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--panel-border);
+}
+
+.likeBtn {
+  background: var(--hover-bg);
+  border: 1px solid var(--panel-border);
+  color: var(--text-main);
+  border-radius: 30px;
+  padding: 0.625rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.likeBtn:hover {
+  transform: scale(1.05);
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+  background: rgba(239, 68, 68, 0.03);
+}
+
+.hasLikes {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.heartIcon {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.likeBtn:active .heartIcon {
+  transform: scale(1.4);
+}
+
+.likeCount {
+  color: var(--text-main);
+}
+
+.status {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 4rem 0;
+}
+
+.error {
+  text-align: center;
+  color: #ef4444;
+  padding: 4rem 0;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .article {
+    padding: 1.5rem 1rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+}

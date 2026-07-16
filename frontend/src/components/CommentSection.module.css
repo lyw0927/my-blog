@@ -1,0 +1,336 @@
+.section {
+  padding: 1.5rem;
+  margin-top: 2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.heading {
+  margin: 0 0 1.25rem 0;
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--panel-border);
+  padding-bottom: 0.75rem;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item {
+  padding: 0.875rem 1rem;
+  background: var(--hover-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  position: relative;
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.commentMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.825rem;
+}
+
+.commentAuthor {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.commentDate {
+  color: var(--text-muted);
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.deleteBtn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.commentContent {
+  margin: 0;
+  font-size: 0.925rem;
+  color: var(--text-main);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 1.5rem 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 1px solid var(--panel-border);
+  padding-top: 1.25rem;
+}
+
+.inputs {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.input, .textarea {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  color: var(--text-main);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.input:focus, .textarea:focus {
+  border-color: var(--input-focus);
+  background: rgba(31, 41, 55, 0.7);
+  box-shadow: 0 0 0 2px var(--primary-glow);
+}
+
+.input {
+  flex: 1;
+  max-width: 200px;
+}
+
+.textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Comment Avatars styles */
+.commentAvatarWrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--panel-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.commentAvatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.commentMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loggedInInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.guestFields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.guestAvatarContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.guestAvatarLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.singleAvatarRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.activeAvatar {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 6px var(--primary-glow);
+}
+
+.rollBtn {
+  background: var(--input-bg);
+  border: 1.5px dashed var(--panel-border);
+  font-size: 0.9rem;
+  color: var(--text-main);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.6s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.rollBtn:hover {
+  transform: rotate(360deg) scale(1.15);
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--hover-bg);
+}
+
+/* ─────── 수정/삭제 버튼 ─────── */
+.commentActions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.editBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.editBtn:hover {
+  color: var(--primary);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.deleteBtn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* ─────── 비밀번호 확인 모달 ─────── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  width: min(420px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: var(--font-title);
+}
+
+.modalDesc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.dangerBtn {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.35) !important;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--text-muted);
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.cancelBtn:hover {
+  background: var(--hover-bg);
+  color: var(--text-main);
+}
+
+.loggedInUserText {
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
