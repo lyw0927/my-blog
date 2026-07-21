@@ -4,7 +4,7 @@ compatibility_date = "2026-07-21"
 [[d1_databases]]
 binding = "DB"
 database_name = "my-blog-db"
-database_id = "d1-database-uuid" # We can use a placeholder for now, local development creates its own DB.
+database_id = "bcde0bfb-b257-4493-80f1-48ca6a0edd28"
 
 [[r2_buckets]]
 binding = "MY_BUCKET"
