@@ -182,7 +182,7 @@ export default function MarkdownRenderer({ content }) {
         cardName = KOREAN_CARD_MAP[cardName] || cardName;
       }
 
-      return `<a class="card-tooltip-trigger" href="https://namu.wiki/w/${encodeURIComponent(displayName)}" target="_blank" rel="noopener noreferrer" data-card-name="${cardName}" style="color: var(--primary); font-weight: 700; border-bottom: 1px dashed var(--primary); cursor: pointer; text-decoration: none;">${displayName}</a>`;
+      return `<a class="card-tooltip-trigger" href="https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&keyword=${encodeURIComponent(displayName)}&stype=1&request_locale=ko" target="_blank" rel="noopener noreferrer" data-card-name="${cardName}" style="color: var(--primary); font-weight: 700; border-bottom: 1px dashed var(--primary); cursor: pointer; text-decoration: none;">${displayName}</a>`;
     });
 
     // 엔터키(줄바꿈)가 실제 브라우저 화면 상에서도 줄바꿈(<br>)으로 렌더링되도록 개행 문자 변환

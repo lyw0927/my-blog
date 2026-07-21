@@ -141,7 +141,7 @@ export default function DeckListRenderer({ content }) {
                       key={`${card.englishName}-${i}`} 
                       className={`${styles.cardWrapper} card-tooltip-trigger`}
                       data-card-name={card.englishName}
-                      href={`https://namu.wiki/w/${encodeURIComponent(card.rawName)}`}
+                      href={`https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&keyword=${encodeURIComponent(card.rawName)}&stype=1&request_locale=ko`}
                       target="_blank"
                       rel="noopener noreferrer"
                       title={card.rawName}

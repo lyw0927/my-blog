@@ -50,9 +50,9 @@ export default function CardTooltip() {
         setActiveCard(cardData);
         setLoading(false);
         
-        // 나무위키 실제 대상 문서명이 있으면 링크 href 동적 수정 (404 방지)
+        // 유희왕 뉴런 공식 DB 링크로 동적 수정
         if (cardData && cardData.namuwiki_page && trigger.tagName === 'A') {
-          trigger.setAttribute('href', `https://namu.wiki/w/${encodeURIComponent(cardData.namuwiki_page)}`);
+          trigger.setAttribute('href', `https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&keyword=${encodeURIComponent(cardData.namuwiki_page)}&stype=1&request_locale=ko`);
         }
       } else {
         try {
@@ -60,9 +60,9 @@ export default function CardTooltip() {
           cardCache[cardName] = cardData;
           setActiveCard(cardData);
           
-          // 나무위키 실제 대상 문서명이 있으면 링크 href 동적 수정 (404 방지)
+          // 유희왕 뉴런 공식 DB 링크로 동적 수정
           if (cardData && cardData.namuwiki_page && trigger.tagName === 'A') {
-            trigger.setAttribute('href', `https://namu.wiki/w/${encodeURIComponent(cardData.namuwiki_page)}`);
+            trigger.setAttribute('href', `https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&keyword=${encodeURIComponent(cardData.namuwiki_page)}&stype=1&request_locale=ko`);
           }
         } catch (err) {
           setError(true);
