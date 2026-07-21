@@ -290,115 +290,53 @@ function extractKoreanDescription(html, cardName) {
 }
 
 export async function translateViaNamuwiki(koreanName) {
-  // 하이픈(-)과 전각 하이픈(－) 매칭을 위해 조회할 URL 후보 목록 작성
-  const namesToTry = [koreanName];
-  if (koreanName.includes('-')) {
-    namesToTry.push(koreanName.replace(/-/g, '－'));
-    const prefix = koreanName.split('-')[0].trim();
-    if (prefix.length >= 2) {
-      namesToTry.push(prefix);
-      namesToTry.push(`${prefix}(유희왕)`);
-    }
-  }
-  if (koreanName.includes('－')) {
-    namesToTry.push(koreanName.replace(/－/g, '-'));
-    const prefix = koreanName.split('－')[0].trim();
-    if (prefix.length >= 2) {
-      namesToTry.push(prefix);
-      namesToTry.push(`${prefix}(유희왕)`);
-    }
-  }
+  const cleanName = koreanName.trim();
   
-  // 2. 하이픈이 없고 공백이 있는 경우: 공백을 하이픈(- 또는 －)으로 치환한 조합들을 후보군으로 추가
-  if (!koreanName.includes('-') && !koreanName.includes('－') && koreanName.includes(' ')) {
-    const words = koreanName.trim().split(/\s+/);
-    if (words.length > 1) {
-      for (let i = 1; i < words.length; i++) {
-        const left = words.slice(0, i).join(' ');
-        const right = words.slice(i).join(' ');
-        
-        namesToTry.push(`${left}-${right}`);
-        namesToTry.push(`${left}－${right}`);
-        
-        if (left.length >= 2) {
-          namesToTry.push(left);
-          namesToTry.push(`${left}(유희왕)`);
-        }
+  try {
+    // 1단계: 공식 유희왕 OCG DB (ko) 검색하여 CID 찾기
+    const searchUrl = `https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&keyword=${encodeURIComponent(cleanName)}&stype=1&request_locale=ko`;
+    const res = await fetch(searchUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
       }
-    }
-  }
-  
-  // '(유희왕)' 접미사가 없는 경우 접미사 버전도 시도 리스트에 추가
-  if (!koreanName.includes('(유희왕)')) {
-    const rawClean = koreanName.replace(/\(유희왕\)/g, '').trim();
-    namesToTry.push(`${rawClean}(유희왕)`);
-    if (rawClean.includes('-')) {
-      namesToTry.push(`${rawClean.replace(/-/g, '－')}(유희왕)`);
-    }
-    if (rawClean.includes('－')) {
-      namesToTry.push(`${rawClean.replace(/－/g, '-')}(유희왕)`);
-    }
-  }
-
-  const uniqueNames = [...new Set(namesToTry)];
-  for (const name of uniqueNames) {
-    try {
-      let html = await fetchNamuwiki(name);
-      const isParentOrArchetype = (name !== koreanName);
-      let englishName = extractEnglishName(html, koreanName, isParentOrArchetype);
-      if (englishName) {
-        const descKo = extractKoreanDescription(html, koreanName);
-        return { englishName, descKo, resolvedPage: name };
-      }
-    } catch (err) {
-      // 404 등 에러 시 다음 후보 시도
-    }
-  }
-
-  // 3단계: 아키타입(단어별) 기반 통합 문서 조회 (예: "웰컴 라비린스" -> "웰컴" (실패) -> "라비린스" -> "라뷰린스" 문서 검색)
-  const parts = koreanName.trim().split(/\s+/);
-  if (parts.length > 1) {
-    const candidates = [];
-    for (const p of parts.filter(p => p.length >= 2)) {
-      candidates.push(p);
-      
-      // 유사 철자 후보군 추가
-      for (const eq of SPELLING_EQUIVALENCES) {
-        let matched = false;
-        for (const key of eq.keys) {
-          if (p.includes(key)) {
-            matched = true;
-            break;
-          }
-        }
-        if (matched) {
-          for (const key of eq.keys) {
-            candidates.push(p.replace(eq.pattern, key));
-          }
-        }
-      }
-    }
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
     
-    // 중복 제거
-    const uniqueCandidates = [...new Set(candidates)];
-    
-    for (const archetype of uniqueCandidates) {
-      const archetypesToTry = [archetype, `${archetype}(유희왕)`];
-      for (const arch of archetypesToTry) {
-        try {
-          let html = await fetchNamuwiki(arch);
-          let englishName = extractEnglishName(html, koreanName, true);
-          if (englishName) {
-            console.log(`[Archetype Match] 아키타입 문서 '${arch}'에서 '${koreanName}' 매칭 성공!`);
-            const descKo = extractKoreanDescription(html, koreanName);
-            return { englishName, descKo, resolvedPage: arch };
-          }
-        } catch (err) {
-          // 패스
-        }
+    const cidMatch = html.match(/cid=(\d+)/);
+    if (!cidMatch) {
+      // 1-2단계: 혹시 공백 차이가 있을 수 있으므로 공백을 없애고 재검색 시도
+      if (cleanName.includes(' ')) {
+        const noSpaceName = cleanName.replace(/\s+/g, '');
+        return translateViaNamuwiki(noSpaceName);
       }
+      return null;
     }
+    const cid = cidMatch[1];
+    
+    // 2단계: 공식 유희왕 OCG DB (en)에서 상세 페이지 로드
+    const detailUrl = `https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=2&cid=${cid}&request_locale=en`;
+    const detailRes = await fetch(detailUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+      }
+    });
+    if (!detailRes.ok) return null;
+    const detailHtml = await detailRes.text();
+    
+    // 3단계: 타이틀 태그에서 영문 공식명 추출
+    const titleMatch = detailHtml.match(/<title>(.*?)\s*\|\s*Card Details\s*\|\s*/i);
+    if (titleMatch) {
+      const englishName = decodeHtmlEntities(titleMatch[1].trim());
+      console.log(`[Konami Match] '${koreanName}' -> '${englishName}' (cid: ${cid})`);
+      return {
+        englishName,
+        descKo: '',
+        resolvedPage: detailUrl
+      };
+    }
+  } catch (err) {
+    console.error(`Konami translation failed for ${koreanName}:`, err);
   }
-  
   return null;
 }
