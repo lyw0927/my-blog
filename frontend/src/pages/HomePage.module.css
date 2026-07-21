@@ -86,15 +86,17 @@
 }
 
 .activeCat {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  border-color: transparent;
   color: #fff;
+  box-shadow: 0 0 12px var(--primary-glow);
 }
 
 .activeCat:hover {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  border-color: transparent;
   color: #fff;
+  box-shadow: 0 0 18px var(--primary-glow);
 }
 
 .searchWrapper {
@@ -183,7 +185,8 @@
   left: 0.5rem;
   right: 0.5rem;
   height: 2px;
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+  box-shadow: 0 0 8px var(--primary-glow);
   border-radius: 2px;
 }
 

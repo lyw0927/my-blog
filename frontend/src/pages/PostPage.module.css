@@ -18,7 +18,8 @@
 
 .progressBar {
   height: 100%;
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 50%, var(--accent) 100%);
+  box-shadow: 0 0 8px var(--primary-glow);
   transition: width 0.1s ease-out;
 }
 

@@ -46,13 +46,24 @@ export default function CardTooltip() {
 
       // 캐시 유무 확인 후 로드
       if (cardCache[cardName]) {
-        setActiveCard(cardCache[cardName]);
+        const cardData = cardCache[cardName];
+        setActiveCard(cardData);
         setLoading(false);
+        
+        // 나무위키 실제 대상 문서명이 있으면 링크 href 동적 수정 (404 방지)
+        if (cardData && cardData.namuwiki_page && trigger.tagName === 'A') {
+          trigger.setAttribute('href', `https://namu.wiki/w/${encodeURIComponent(cardData.namuwiki_page)}`);
+        }
       } else {
         try {
           const cardData = await getCardInfo(cardName);
           cardCache[cardName] = cardData;
           setActiveCard(cardData);
+          
+          // 나무위키 실제 대상 문서명이 있으면 링크 href 동적 수정 (404 방지)
+          if (cardData && cardData.namuwiki_page && trigger.tagName === 'A') {
+            trigger.setAttribute('href', `https://namu.wiki/w/${encodeURIComponent(cardData.namuwiki_page)}`);
+          }
         } catch (err) {
           setError(true);
         } finally {
@@ -70,12 +81,20 @@ export default function CardTooltip() {
       setActiveCard(null);
     };
 
+    const handleGlobalClick = () => {
+      setVisible(false);
+      setLoading(false);
+      setActiveCard(null);
+    };
+
     document.addEventListener('mouseover', handleMouseOver);
     document.addEventListener('mouseout', handleMouseOut);
+    document.addEventListener('click', handleGlobalClick);
 
     return () => {
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
+      document.removeEventListener('click', handleGlobalClick);
     };
   }, []);
 

@@ -134,29 +134,36 @@ export default function DeckListRenderer({ content }) {
               const info = cardInfos[card.englishName];
               const imageUrl = info?.card_images?.[0]?.image_url_small || info?.card_images?.[0]?.image_url || 'https://ms.yugipedia.com//thumb/e/e5/Back-EN.png/200px-Back-EN.png';
               
-              // 카드 장수만큼 루프 돌려 이미지 렌더링
-              const cardsToRender = [];
-              for (let i = 0; i < card.count; i++) {
-                cardsToRender.push(
-                  <a 
-                    key={`${card.englishName}-${i}`} 
-                    className={`${styles.cardWrapper} card-tooltip-trigger`}
-                    data-card-name={card.englishName}
-                    href={`https://namu.wiki/w/${encodeURIComponent(card.rawName)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={card.rawName}
-                  >
-                    <img 
-                      src={imageUrl} 
-                      alt={card.rawName} 
-                      className={styles.cardImg}
-                      loading="lazy"
-                    />
-                  </a>
-                );
-              }
-              return cardsToRender;
+              return (
+                <div key={card.englishName} className={styles.cardStack}>
+                  {Array.from({ length: card.count }).map((_, i) => (
+                    <a 
+                      key={`${card.englishName}-${i}`} 
+                      className={`${styles.cardWrapper} card-tooltip-trigger`}
+                      data-card-name={card.englishName}
+                      href={`https://namu.wiki/w/${encodeURIComponent(card.rawName)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={card.rawName}
+                      style={{
+                        zIndex: i + 1,
+                      }}
+                    >
+                      <img 
+                        src={imageUrl} 
+                        alt={card.rawName} 
+                        className={styles.cardImg}
+                        loading="lazy"
+                      />
+                    </a>
+                  ))}
+                  {card.count > 1 && (
+                    <span className={styles.countBadge}>
+                      x{card.count}
+                    </span>
+                  )}
+                </div>
+              );
             })}
           </div>
         </div>

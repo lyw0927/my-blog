@@ -10,6 +10,18 @@
   transition: var(--transition-smooth);
 }
 
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 50%, var(--accent) 100%);
+  box-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--secondary-glow);
+  border-radius: 1px;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -210,3 +222,21 @@
     font-size: 1.25rem;
   }
 }
+
+/* 🕰️ 펜듈럼 스윙 애니메이션 (Pendulum Swing) */
+.pendulumSwing {
+  animation: pendulumSwingAnim 1.6s ease-in-out infinite;
+  transform-origin: top center;
+  /* Add a little shadow to enhance the swinging depth */
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes pendulumSwingAnim {
+  0%, 100% {
+    transform: rotate(-28deg);
+  }
+  50% {
+    transform: rotate(28deg);
+  }
+}
+

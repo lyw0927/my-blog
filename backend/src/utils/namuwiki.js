@@ -40,26 +40,41 @@ const SPELLING_EQUIVALENCES = [
   { pattern: /드래곤\s*메이드/g, replacement: '드래곤\\s*메이드', keys: ['드래곤메이드', '드래곤 메이드'] }
 ];
 
-function extractEnglishName(html, koreanName, isArchetypePage) {
-  // 특수문자 이스케이프 처리
-  let escapedName = koreanName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+function buildRegexPattern(cardName) {
+  // 1. (유희왕) 접미사 제거
+  const clean = cardName.replace(/\(유희왕\)/g, '').trim();
   
-  // 공통 유사 철자 정규식 변환 적용
+  // 2. 특수문자 이스케이프
+  let escaped = clean.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  
+  // 3. 하이픈 유연 매칭 (이스케이프된 \- 또는 -를 전각 하이픈, 중점, 일반 하이픈 및 주위 공백 포함하여 매칭하도록 변경)
+  escaped = escaped.replace(/\\-/g, '\\s*[-－—–·]\\s*');
+  
+  // 4. 공백 유연 매칭 (공백 자리에 하이픈이 오거나 공백이 올 수 있도록 처리)
+  escaped = escaped.replace(/\s+/g, '[\\s-－—–·]+');
+  
+  // 5. 공통 유사 철자 정규식 변환 적용
   for (const eq of SPELLING_EQUIVALENCES) {
-    if (eq.pattern.test(escapedName)) {
-      escapedName = escapedName.replace(eq.pattern, eq.replacement);
+    if (eq.pattern.test(escaped)) {
+      escaped = escaped.replace(eq.pattern, eq.replacement);
     }
   }
   
-  // 1단계: 검색한 카드명과 정확히 일치하는 인포박스 타이틀 블록 매칭 (동적 정규식)
-  const dynamicRegex = new RegExp(`<b><span[^>]*>\\s*${escapedName}\\s*</span></b>(?:.*?<br\\s*/?>)+?\\s*([a-zA-Z0-9\\s',!\\-\\&\\#\\(\\)\\.\\/\\;\\"]+)</div>`, 'i');
+  return escaped;
+}
+
+function extractEnglishName(html, koreanName, isArchetypePage) {
+  const patternStr = buildRegexPattern(koreanName);
+  
+  // 1단계: 검색한 카드명과 정확히 일치하는 인포박스 타이틀 블록 매칭 (동적 정규식, <sub> 또는 </div> 로 마감되는 유연 매칭)
+  const dynamicRegex = new RegExp(`<b><span[^>]*>\\s*${patternStr}\\s*</span></b>[\\s\\S]*?<br\\s*/?>\\s*([a-zA-Z0-9\\s',!\\-\\&\\#\\(\\)\\.\\/\\;\\"]+)(?:\\s*<sub>|\\s*</div>)`, 'i');
   const dynMatch = html.match(dynamicRegex);
   if (dynMatch) {
     return decodeHtmlEntities(dynMatch[1].trim());
   }
 
   // 1-2단계: 폴백 동적 정규식 (<tr><td colspan="2"><strong>카드명</strong><br>영문명)
-  const dynamicFbRegex = new RegExp(`<strong>\\s*${escapedName}\\s*</strong><br\\s*/?>\\s*([a-zA-Z0-9\\s',!\\-\\&\\#\\(\\)\\.\\/\\;\\"]+)`, 'i');
+  const dynamicFbRegex = new RegExp(`<strong>\\s*${patternStr}\\s*</strong>[\\s\\S]*?<br\\s*/?>\\s*([a-zA-Z0-9\\s',!\\-\\&\\#\\(\\)\\.\\/\\;\\"]+)(?:\\s*<sub>|\\s*</div>)`, 'i');
   const dynFbMatch = html.match(dynamicFbRegex);
   if (dynFbMatch) {
     return decodeHtmlEntities(dynFbMatch[1].trim());
@@ -71,13 +86,13 @@ function extractEnglishName(html, koreanName, isArchetypePage) {
   }
 
   // 2단계: 기존 제네릭 정규식 (단독 카드 문서에서 최종 폴백)
-  const regex = /<b><span[^>]*>([^<]+)<\/span><\/b>(?:.*?<br\s*\/?>)+?\s*([a-zA-Z0-9\s',!\-\&\#\ON\(\)\.\/\;\"]+)<\/div>/i;
+  const regex = /<b><span[^>]*>([^<]+)<\/span><\/b>[\s\S]*?<br\s*\/?>\s*([a-zA-Z0-9\s',!\-\&\#\ON\(\)\.\/\;\"]+)(?:\s*<sub>|\s*<\/div>)/i;
   const match = html.match(regex);
   if (match) {
     return decodeHtmlEntities(match[2].trim());
   }
 
-  const fallbackRegex = /<strong>([^<]+)<\/strong><br\s*\/?>\s*([a-zA-Z0-9\s',!\-\&\#\(\)\.\/\;\"]+)/i;
+  const fallbackRegex = /<strong>([^<]+)<\/strong>[\\s\\S]*?<br\s*\/?>\s*([a-zA-Z0-9\s',!\-\&\#\(\)\.\/\;\"]+)/i;
   const fbMatch = html.match(fallbackRegex);
   if (fbMatch) {
     return decodeHtmlEntities(fbMatch[2].trim());
@@ -110,56 +125,88 @@ function cleanHtmlTags(str) {
   return str.replace(/<[^>]*>/g, '').trim();
 }
 
-function extractKoreanDescription(html, cardName) {
-  // 1. 접미사 (유희왕) 제거
-  const cleanCardName = cardName.replace(/\(유희왕\)/g, '').trim();
+function getDivContent(slice, startIndex) {
+  const openTagEnd = slice.indexOf('>', startIndex);
+  if (openTagEnd === -1) return null;
   
-  let escapedName = cleanCardName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-  // 공통 유사 철자 정규식 변환 적용
-  for (const eq of SPELLING_EQUIVALENCES) {
-    if (eq.pattern.test(escapedName)) {
-      escapedName = escapedName.replace(eq.pattern, eq.replacement);
+  let depth = 1;
+  let currentIndex = openTagEnd + 1;
+  
+  while (depth > 0 && currentIndex < slice.length) {
+    const nextClose = slice.indexOf('</div>', currentIndex);
+    const nextOpen = slice.indexOf('<div', currentIndex);
+    
+    if (nextClose === -1) {
+      break;
+    }
+    
+    if (nextOpen !== -1 && nextOpen < nextClose) {
+      depth++;
+      currentIndex = nextOpen + 4;
+    } else {
+      depth--;
+      currentIndex = nextClose + 6;
+      if (depth === 0) {
+        return {
+          content: slice.slice(openTagEnd + 1, nextClose),
+          endIndex: nextClose + 6
+        };
+      }
     }
   }
+  return null;
+}
+
+function extractKoreanDescription(html, cardName) {
+  const patternStr = buildRegexPattern(cardName);
 
   // 카드 타이틀이 들어간 스팬 검색
-  const titleRegex = new RegExp(`<b><span[^>]*>\\s*${escapedName}\\s*</span></b>`, 'i');
+  const titleRegex = new RegExp(`<b><span[^>]*>\\s*${patternStr}\\s*</span></b>`, 'i');
   const titleMatch = html.match(titleRegex);
   if (!titleMatch) {
     return null;
   }
 
   const startIdx = titleMatch.index;
-  // 인포박스 영역 슬라이싱
-  const slice = html.slice(startIdx, startIdx + 8000);
+  // 인포박스 영역 슬라이싱 (펜듈럼 카드의 다량 정보 대비 25,000자로 대폭 확장)
+  const slice = html.slice(startIdx, startIdx + 25000);
   
   // 마법/함정 카드 혹은 펜듈럼/효과 몬스터 템플릿 (하얀 반투명 배경의 div들)
-  const spellRegex = /<div style='[^']*background:\s*(?:#ffffffdd|#ffffff|rgba\(255,\s*255,\s*255,\s*0\.\d+\))[^*']*'[^>]*>([\s\S]*?)<\/div>/gi;
-  let spellMatch;
+  const startRegex = /<div style='[^']*background:\s*(?:#ffffffdd|#ffffff|rgba\(255,\s*255,\s*255,\s*0\.\d+\))[^*']*'[^>]*>/gi;
+  let match;
   const candidates = [];
 
-  while ((spellMatch = spellRegex.exec(slice)) !== null) {
-    const rawText = spellMatch[1];
-    const cleaned = cleanHtmlTags(rawText);
-    const decoded = decodeHtmlEntities(cleaned);
+  while ((match = startRegex.exec(slice)) !== null) {
+    const startIndex = match.index;
+    const parsed = getDivContent(slice, startIndex);
+    if (parsed) {
+      const rawText = parsed.content;
+      const cleaned = cleanHtmlTags(rawText);
+      const decoded = decodeHtmlEntities(cleaned);
 
-    if (decoded.length < 15) continue;
-    
-    // 단순 정보행 제외
-    if (decoded.includes('마법 카드') || decoded.includes('함정 카드') || decoded.includes('공격력') || decoded.includes('수비력')) {
-      if (!decoded.includes('①') && !decoded.includes('이 카드명')) {
+      if (decoded.length < 15) {
+        startRegex.lastIndex = parsed.endIndex;
         continue;
       }
-    }
+      
+      // 단순 정보행 제외
+      if (decoded.includes('마법 카드') || decoded.includes('함정 카드') || decoded.includes('공격력') || decoded.includes('수비력')) {
+        if (!decoded.includes('①') && !decoded.includes('이 카드명')) {
+          startRegex.lastIndex = parsed.endIndex;
+          continue;
+        }
+      }
 
-    const score = decoded.length 
-      + (decoded.includes('①') ? 100 : 0) 
-      + (decoded.includes('②') ? 80 : 0) 
-      + (decoded.includes('1턴에 1번') ? 50 : 0)
-      + (decoded.includes('펜듈럼') ? 30 : 0);
+      const score = decoded.length 
+        + (decoded.includes('①') ? 100 : 0) 
+        + (decoded.includes('②') ? 80 : 0) 
+        + (decoded.includes('1턴에 1번') ? 50 : 0)
+        + (decoded.includes('펜듈럼') ? 30 : 0);
 
-    if (score > 40) {
-      candidates.push({ rawText, decoded, score });
+      if (score > 40) {
+        candidates.push({ rawText, decoded, score });
+      }
+      startRegex.lastIndex = parsed.endIndex;
     }
   }
 
@@ -175,8 +222,9 @@ function extractKoreanDescription(html, cardName) {
     finalBlocks.push(first.rawText);
     seenTexts.add(first.decoded.slice(0, 15));
 
-    // 2위 후보 중 1위와 내용이 다르고 점수가 높은 녀석이 있다면 결합 (펜듈럼 효과 + 몬스터 효과 융합)
+    // 2위 후보 중 1위와 내용이 다르고 점수가 높은 녀석이 있다면 결합 (최대 2블록: 펜듈럼 효과 + 몬스터 효과 융합)
     for (let i = 1; i < candidates.length; i++) {
+      if (finalBlocks.length >= 2) break;
       const cand = candidates[i];
       const prefix = cand.decoded.slice(0, 15);
       if (!seenTexts.has(prefix) && cand.score > 80) {
@@ -249,30 +297,68 @@ function extractKoreanDescription(html, cardName) {
 }
 
 async function translateViaNamuwiki(koreanName) {
-  // 1단계: 카드 이름으로 직접 조회
-  try {
-    let html = await fetchNamuwiki(koreanName);
-    let englishName = extractEnglishName(html, koreanName, false);
-    if (englishName) {
-      const descKo = extractKoreanDescription(html, koreanName);
-      return { englishName, descKo };
+  // 하이픈(-)과 전각 하이픈(－) 매칭을 위해 조회할 URL 후보 목록 작성
+  const namesToTry = [koreanName];
+  if (koreanName.includes('-')) {
+    namesToTry.push(koreanName.replace(/-/g, '－'));
+    const prefix = koreanName.split('-')[0].trim();
+    if (prefix.length >= 2) {
+      namesToTry.push(prefix);
+      namesToTry.push(`${prefix}(유희왕)`);
     }
-  } catch (err) {
-    // 404 등 발생 시 패스
+  }
+  if (koreanName.includes('－')) {
+    namesToTry.push(koreanName.replace(/－/g, '-'));
+    const prefix = koreanName.split('－')[0].trim();
+    if (prefix.length >= 2) {
+      namesToTry.push(prefix);
+      namesToTry.push(`${prefix}(유희왕)`);
+    }
   }
   
-  // 2단계: '(유희왕)' 접미사 붙여서 우회 조회 (동음이의어 대응)
+  // 2. 하이픈이 없고 공백이 있는 경우: 공백을 하이픈(- 또는 －)으로 치환한 조합들을 후보군으로 추가
+  if (!koreanName.includes('-') && !koreanName.includes('－') && koreanName.includes(' ')) {
+    const words = koreanName.trim().split(/\s+/);
+    if (words.length > 1) {
+      for (let i = 1; i < words.length; i++) {
+        const left = words.slice(0, i).join(' ');
+        const right = words.slice(i).join(' ');
+        
+        namesToTry.push(`${left}-${right}`);
+        namesToTry.push(`${left}－${right}`);
+        
+        if (left.length >= 2) {
+          namesToTry.push(left);
+          namesToTry.push(`${left}(유희왕)`);
+        }
+      }
+    }
+  }
+  
+  // '(유희왕)' 접미사가 없는 경우 접미사 버전도 시도 리스트에 추가
   if (!koreanName.includes('(유희왕)')) {
+    const rawClean = koreanName.replace(/\(유희왕\)/g, '').trim();
+    namesToTry.push(`${rawClean}(유희왕)`);
+    if (rawClean.includes('-')) {
+      namesToTry.push(`${rawClean.replace(/-/g, '－')}(유희왕)`);
+    }
+    if (rawClean.includes('－')) {
+      namesToTry.push(`${rawClean.replace(/－/g, '-')}(유희왕)`);
+    }
+  }
+
+  const uniqueNames = [...new Set(namesToTry)];
+  for (const name of uniqueNames) {
     try {
-      const fallbackName = `${koreanName}(유희왕)`;
-      let html = await fetchNamuwiki(fallbackName);
-      let englishName = extractEnglishName(html, koreanName, false);
+      let html = await fetchNamuwiki(name);
+      const isParentOrArchetype = (name !== koreanName);
+      let englishName = extractEnglishName(html, koreanName, isParentOrArchetype);
       if (englishName) {
         const descKo = extractKoreanDescription(html, koreanName);
-        return { englishName, descKo };
+        return { englishName, descKo, resolvedPage: name };
       }
     } catch (err) {
-      // 패스
+      // 404 등 에러 시 다음 후보 시도
     }
   }
 
@@ -312,7 +398,7 @@ async function translateViaNamuwiki(koreanName) {
           if (englishName) {
             console.log(`[Archetype Match] 아키타입 문서 '${arch}'에서 '${koreanName}' 매칭 성공!`);
             const descKo = extractKoreanDescription(html, koreanName);
-            return { englishName, descKo };
+            return { englishName, descKo, resolvedPage: arch };
           }
         } catch (err) {
           // 패스

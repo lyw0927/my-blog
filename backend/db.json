@@ -1,15 +1,15 @@
 {
   "posts": {
-    "mock_uka295l5s": {
-      "title": "ㅁㄴㅇㅁㅇ",
-      "content": "[[별을 읽는 마술사]]\n[[별을 새기는 마술사]]\n[[별을 읽는 마술사-홀로스코프 매지션]]",
+    "mock_q8hv07is1": {
+      "title": "ㅁㄴㅇㅁㄴ",
+      "content": "```decklist\n# 메인 덱\n조현의 마술사 x3\n혜안의 마술사 x3\n자독의 마술사 x3\n우라라 x3\n증식의 G x3\n무덤의 지명자 x2\n\n# 엑스트라 덱\n별을 새기는 마술사 x1\n```",
       "author": "Sinji",
       "authorId": "admin",
       "category": "덱 리스트",
       "tags": [],
-      "likes": 0,
-      "views": 10,
-      "createdAt": "2026-07-16T03:09:27.143Z"
+      "likes": 1,
+      "views": 8,
+      "createdAt": "2026-07-21T02:12:10.126Z"
     }
   },
   "comments": {},
@@ -17,7 +17,7 @@
     "config": {
       "blogTitle": "마술사 덱 노트",
       "logoEmoji": "🃏",
-      "logoImageUrl": "https://images.ygoprodeck.com/images/cards_small/76794549.jpg",
+      "logoImageUrl": "https://images.ygoprodeck.com/images/cards_small/92644052.jpg",
       "subtitle": "유희왕 마술사 계열 덱 구성, 매치업, 전략을 기록하는 덱 노트"
     }
   },
@@ -32,6 +32,11 @@
       "postId": "mock_q3b3bar92",
       "ip": "::1",
       "likedAt": "2026-07-16T02:24:59.390Z"
+    },
+    "mock_q8hv07is1___1": {
+      "postId": "mock_q8hv07is1",
+      "ip": "::1",
+      "likedAt": "2026-07-21T02:26:17.122Z"
     }
   },
   "cards_cache": {
@@ -118,59 +123,295 @@
             "amazon_price": "0.94",
             "coolstuffinc_price": "0.49"
           }
-        ]
+        ],
+        "desc_ko": "P스케일 1①: 자신의 펜듈럼 몬스터가 전투를 실행하는 배틀 스텝에 발동할 수 있다. 1턴에 1번, 마법 카드의 발동과 효과를 무효로 한다. 그 후, 그 마법 카드는 묘지로 보내지 않고, 그대로 마법 & 함정 존에 세트하고, 이 턴 다시 발동할 수 없다.\n\n----------------------------------------\n\n마법사족          / 펜듈럼             / 효과      ①: 1턴에 1번, 자신의 펜듈럼 몬스터 1장이 필드에서 벗어났을 때 발동할 수 있다. 그 몬스터를 자신 필드에 특수 소환한다.",
+        "name_ko": "별을 읽는 마술사",
+        "namuwiki_page": "별을 읽는 마술사"
       },
-      "lastAccessedAt": 1784171824397
+      "lastAccessedAt": 1784602634668
     },
-    "%EB%B3%84%EC%9D%84%20%EC%83%88%EA%B8%B0%EB%8A%94%20%EB%A7%88%EC%88%A0%EC%82%AC": {
+    "Apollousa%2C%20Bow%20of%20the%20Goddess": {
       "cardData": {
-        "id": 47349116,
-        "name": "Timestar Magician",
+        "id": 4280258,
+        "name": "Apollousa, Bow of the Goddess",
         "typeline": [
-          "Spellcaster",
-          "Xyz",
+          "Fairy",
+          "Link",
           "Effect"
         ],
-        "type": "XYZ Monster",
-        "humanReadableCardType": "Xyz Effect Monster",
-        "frameType": "xyz",
-        "desc": "2 Level 4 \"Magician\" Pendulum Monsters\r\nMust first be Xyz Summoned with the above Xyz Materials. Once per turn: You can detach 1 Xyz Material from this card; add to your hand, 1 DARK Spellcaster-Type monster from your Deck, Graveyard, or face-up from your Extra Deck. Once per turn, if a Pendulum Monster Card(s) in your Monster Zone or Pendulum Zone would be destroyed by battle or card effect, you can send 1 Spellcaster-Type monster from your Deck to the Graveyard instead.",
-        "race": "Spellcaster",
-        "atk": 2400,
-        "def": 1200,
-        "level": 4,
-        "attribute": "DARK",
-        "ygoprodeck_url": "https://ygoprodeck.com/card/timestar-magician-8323",
+        "type": "Link Monster",
+        "humanReadableCardType": "Link Effect Monster",
+        "frameType": "link",
+        "desc": "2+ monsters with different names, except Tokens\r\nYou can only control 1 \"Apollousa, Bow of the Goddess\". The original ATK of this card becomes 800 x the number of Link Materials used for its Link Summon. Once per Chain, when your opponent activates a monster effect (Quick Effect): You can make this card lose exactly 800 ATK, and if you do, negate the activation.",
+        "race": "Fairy",
+        "atk": -1,
+        "def": null,
+        "level": null,
+        "attribute": "WIND",
+        "linkval": 4,
+        "linkmarkers": [
+          "Top",
+          "Bottom-Left",
+          "Bottom",
+          "Bottom-Right"
+        ],
+        "ygoprodeck_url": "https://ygoprodeck.com/card/apollousa-bow-of-the-goddess-10242",
         "card_sets": [
           {
-            "set_name": "Pendulum Evolution",
-            "set_code": "PEVO-EN009",
+            "set_name": "2020 Tin of Lost Memories Mega Pack",
+            "set_code": "MP20-EN126",
             "set_rarity": "Ultra Rare",
             "set_rarity_code": "(UR)",
-            "set_price": "1.55"
+            "set_price": "19.76"
+          },
+          {
+            "set_name": "25th Anniversary Rarity Collection II",
+            "set_code": "RA02-EN040",
+            "set_rarity": "Collector's Rare",
+            "set_rarity_code": "(CR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "25th Anniversary Rarity Collection II",
+            "set_code": "RA02-EN040",
+            "set_rarity": "Platinum Secret Rare",
+            "set_rarity_code": "(PS)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "25th Anniversary Rarity Collection II",
+            "set_code": "RA02-EN040",
+            "set_rarity": "Quarter Century Secret Rare",
+            "set_rarity_code": "",
+            "set_price": "0"
+          },
+          {
+            "set_name": "25th Anniversary Rarity Collection II",
+            "set_code": "RA02-EN040",
+            "set_rarity": "Secret Rare",
+            "set_rarity_code": "(ScR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "25th Anniversary Rarity Collection II",
+            "set_code": "RA02-EN040",
+            "set_rarity": "Super Rare",
+            "set_rarity_code": "(SR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "25th Anniversary Rarity Collection II",
+            "set_code": "RA02-EN040",
+            "set_rarity": "Ultimate Rare",
+            "set_rarity_code": "(UtR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "25th Anniversary Rarity Collection II",
+            "set_code": "RA02-EN040",
+            "set_rarity": "Ultra Rare",
+            "set_rarity_code": "(UR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Magnificent Mavens",
+            "set_code": "MAMA-EN075",
+            "set_rarity": "Ultra Rare",
+            "set_rarity_code": "(UR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Maximum Gold",
+            "set_code": "MAGO-EN041",
+            "set_rarity": "Premium Gold Rare",
+            "set_rarity_code": "(PG)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Rising Rampage",
+            "set_code": "RIRA-EN048",
+            "set_rarity": "Secret Rare",
+            "set_rarity_code": "(ScR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Rising Rampage",
+            "set_code": "RIRA-EN048",
+            "set_rarity": "Starlight Rare",
+            "set_rarity_code": "(StR)",
+            "set_price": "0"
           }
         ],
+        "banlist_info": {
+          "ban_tcg": "Forbidden",
+          "ban_ocg": "Forbidden"
+        },
         "card_images": [
           {
-            "id": 47349116,
-            "image_url": "https://images.ygoprodeck.com/images/cards/47349116.jpg",
-            "image_url_small": "https://images.ygoprodeck.com/images/cards_small/47349116.jpg",
-            "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/47349116.jpg"
+            "id": 4280258,
+            "image_url": "https://images.ygoprodeck.com/images/cards/4280258.jpg",
+            "image_url_small": "https://images.ygoprodeck.com/images/cards_small/4280258.jpg",
+            "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/4280258.jpg"
+          },
+          {
+            "id": 4280259,
+            "image_url": "https://images.ygoprodeck.com/images/cards/4280259.jpg",
+            "image_url_small": "https://images.ygoprodeck.com/images/cards_small/4280259.jpg",
+            "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/4280259.jpg"
           }
         ],
         "card_prices": [
           {
-            "cardmarket_price": "0.49",
-            "tcgplayer_price": "0.35",
-            "ebay_price": "1.97",
-            "amazon_price": "1.00",
-            "coolstuffinc_price": "0.25"
+            "cardmarket_price": "0.21",
+            "tcgplayer_price": "0.22",
+            "ebay_price": "10.99",
+            "amazon_price": "49.88",
+            "coolstuffinc_price": "9.99"
           }
         ],
-        "desc_ko": "이 카드는 상기의 카드를 엑시즈 소재로 한 엑시즈 소환으로만 엑스트라 덱에서 특수 소환할 수 있다.①: 1턴에 1번, 이 카드의 엑시즈 소재를 1개 제거하고 발동할 수 있다. 자신의 덱 / 엑스트라 덱(앞면) / 묘지에서 마법사족 / 어둠 속성 몬스터 1장을 패에 넣는다.②: 1턴에 1번, 자신의 몬스터 존 / 펜듈럼 존의 펜듈럼 몬스터 카드가 전투 / 효과로 파괴될 경우, 대신에 자신의 덱에서 마법사족 몬스터 1장을 묘지로 보낼 수 있다.별을 읽는 마술사의 수치를 뒤집은 스테이터스를 갖고 있는 엑시즈 몬스터.①의 효과는 어둠 속성 마법사족 서치 효과. 펜듈럼 에볼루션의 아스트로그래프 매지션, 크로노그래프 매지션의 서치가 가능해졌으며, EM 도크로배트 조커, EM 오드아이즈 디졸버 등도 서치 범위에 걸린다. 덤으로 대상이 펜듈럼 몬스터로 한정되지 않아서 환상의 견습 마도사, <a class='_6dRPS7Gr' href='/w/%EB%94%94%EB%A9%98%EC%85%98%20%EC%96%B4%ED%8A%B8%EB%9E%99%ED%84%B0' title='디멘션 어트랙터' data-v-115d9",
-        "name_ko": "별을 새기는 마술사"
+        "desc_ko": "천사족                  / 링크       / 효과      토큰 이외의 카드명이 다른 몬스터 2장 이상①: \"소명의 신궁－아폴로우사\"는 자신 필드에 1장밖에 앞면 표시로 존재할 수 없다.②: 이 카드의 원래 공격력은, 이 카드의 링크 소재로 한 몬스터의 수 × 800이 된다.③: 상대가 몬스터의 효과를 발동했을 때에 발동할 수 있다(동일한 체인 위에서는 1번까지). 이 카드의 공격력을 800 내리고, 그 발동을 무효로 한다.",
+        "name_ko": "소명의 신궁－아폴로우사",
+        "namuwiki_page": "소명의 신궁-아폴로우사"
       },
-      "lastAccessedAt": 1784171827283
+      "lastAccessedAt": 1784602635916
+    },
+    "%EB%B3%84%EC%9D%84%20%EC%9D%BD%EB%8A%94%20%EB%A7%88%EC%88%A0%EC%82%AC-%ED%99%80%EB%A1%9C%EC%8A%A4%EC%BD%94%ED%94%84%20%EB%A7%A4%EC%A7%80%EC%85%98": {
+      "cardData": {
+        "id": 1186447,
+        "name": "Horoscope Sorcerer, the Stargazer Magician",
+        "typeline": [
+          "Spellcaster",
+          "Pendulum",
+          "Effect"
+        ],
+        "type": "Pendulum Effect Monster",
+        "humanReadableCardType": "Pendulum Effect Monster",
+        "frameType": "effect_pendulum",
+        "desc": "[ Pendulum Effect ] \nWhen a Spell Card or effect activated by your opponent resolves, if you control a \"Magician\" Pendulum Monster or \"Odd-Eyes\" monster, you can negate that effect, then destroy this card. You can only use this effect of \"Horoscope Sorcerer, the Stargazer Magician\" once per turn.\n\n[ Monster Effect ] \nYou can discard 1 other \"Magician\" Pendulum Monster, \"Performapal\" monster, or \"Odd-Eyes\" monster; Special Summon this card from your hand. If this card is Special Summoned: You can add 1 Pendulum Monster with 2500 ATK from your Deck to your hand. You can target 1 Pendulum Monster Card you control; destroy it, then you can add 1 face-up Pendulum Monster from your Extra Deck to your hand. You can only use each effect of \"Horoscope Sorcerer, the Stargazer Magician\" once per turn.",
+        "race": "Spellcaster",
+        "pend_desc": "When a Spell Card or effect activated by your opponent resolves, if you control a \"Magician\" Pendulum Monster or \"Odd-Eyes\" monster, you can negate that effect, then destroy this card. You can only use this effect of \"Horoscope Sorcerer, the Stargazer Magician\" once per turn.",
+        "monster_desc": "You can discard 1 other \"Magician\" Pendulum Monster, \"Performapal\" monster, or \"Odd-Eyes\" monster; Special Summon this card from your hand. If this card is Special Summoned: You can add 1 Pendulum Monster with 2500 ATK from your Deck to your hand. You can target 1 Pendulum Monster Card you control; destroy it, then you can add 1 face-up Pendulum Monster from your Extra Deck to your hand. You can only use each effect of \"Horoscope Sorcerer, the Stargazer Magician\" once per turn.",
+        "atk": 1200,
+        "def": 2400,
+        "level": 5,
+        "attribute": "DARK",
+        "archetype": "Magician",
+        "scale": 1,
+        "ygoprodeck_url": "https://ygoprodeck.com/card/horoscope-sorcerer-the-stargazer-magician-15575",
+        "card_sets": [
+          {
+            "set_name": "Magnificent Monsters",
+            "set_code": "MAMO-EN014",
+            "set_rarity": "Grand Master Rare",
+            "set_rarity_code": "",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Magnificent Monsters",
+            "set_code": "MAMO-EN014",
+            "set_rarity": "Starlight Rare",
+            "set_rarity_code": "(StR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Magnificent Monsters",
+            "set_code": "MAMO-EN014",
+            "set_rarity": "Ultra Rare",
+            "set_rarity_code": "(UR)",
+            "set_price": "0"
+          }
+        ],
+        "card_images": [
+          {
+            "id": 1186447,
+            "image_url": "https://images.ygoprodeck.com/images/cards/1186447.jpg",
+            "image_url_small": "https://images.ygoprodeck.com/images/cards_small/1186447.jpg",
+            "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/1186447.jpg"
+          }
+        ],
+        "card_prices": [
+          {
+            "cardmarket_price": "0.00",
+            "tcgplayer_price": "0.00",
+            "ebay_price": "0.00",
+            "amazon_price": "0.00",
+            "coolstuffinc_price": "0.00"
+          }
+        ],
+        "desc_ko": "P스케일 1이 카드명의 펜듈럼 효과는 1턴에 1번밖에 사용할 수 없다.①: 상대가 발동한 마법 카드의 효과 처리시에, 자신 필드에 \"마술사\" 펜듈럼 몬스터나 \"오드아이즈\" 몬스터가 존재할 경우, 그 발동한 효과를 무효로 할 수 있다. 그 후, 이 카드를 파괴한다.\n\n----------------------------------------\n\n마법사족          / 펜듈럼             / 효과      이 카드명의 ①②③의 몬스터 효과는 각각 1턴에 1번밖에 사용할 수 없다.①: 패에서 다른 \"마술사\" 펜듈럼 몬스터, \"EM(엔터메이트)\" 몬스터, \"오드아이즈\" 몬스터 1장을 버리고 발동할 수 있다. 이 카드를 패에서 특수 소환한다.②: 이 카드를 특수 소환했을 경우에 발동할 수 있다. 덱에서 공격력 2500인 펜듈럼 몬스터 1장을 패에 넣는다.③: 자신 필드의 펜듈럼 몬스터 카드 1장을 대상으로 하고 발동할 수 있다. 그 카드를 파괴한다. 그 후, 자신의 엑스트라 덱(앞면)에서 펜듈럼 몬스터 1장을 패에 넣을 수 있다.",
+        "name_ko": "별을 읽는 마술사-홀로스코프 매지션",
+        "namuwiki_page": "별을 읽는 마술사"
+      },
+      "lastAccessedAt": 1784602677490
+    },
+    "%EC%84%B1%EC%83%81%EC%9D%98%20%EB%A7%88%EC%88%A0%EC%82%AC-%EC%95%84%EC%8A%A4%ED%8A%B8%EB%A1%9C%EA%B7%B8%EB%9E%98%ED%94%84%20%EB%A7%A4%EC%A7%80%EC%85%98": {
+      "cardData": {
+        "id": 48171151,
+        "name": "Astrograph Sorcerer, the Starfrost Magician",
+        "typeline": [
+          "Spellcaster",
+          "Pendulum",
+          "Effect"
+        ],
+        "type": "Pendulum Effect Monster",
+        "humanReadableCardType": "Pendulum Effect Monster",
+        "frameType": "effect_pendulum",
+        "desc": "[ Pendulum Effect ] \nDuring your Main Phase: You can destroy this card, and if you do, place 1 Pendulum Monster whose Pendulum Scale is 1 from your hand or Deck in your Pendulum Zone, except \"Astrograph Sorcerer, the Starfrost Magician\", but it cannot activate its Pendulum Effects this turn. You can only use this effect of \"Astrograph Sorcerer, the Starfrost Magician\" once per turn.\n\n[ Monster Effect ] \nIf a face-up Monster Card(s) you control is destroyed by battle or card effect: You can Special Summon this card from your hand, then you can Special Summon 1 of those destroyed monsters from your GY or face-up Extra Deck. During the Main Phase (Quick Effect): You can Tribute this card, then you can Fusion Summon 1 Dragon Fusion Monster from your Extra Deck, by shuffling its materials from your field and/or face-up Extra Deck into the Deck. You can only use each effect of \"Astrograph Sorcerer, the Starfrost Magician\" once per turn.",
+        "race": "Spellcaster",
+        "pend_desc": "During your Main Phase: You can destroy this card, and if you do, place 1 Pendulum Monster whose Pendulum Scale is 1 from your hand or Deck in your Pendulum Zone, except \"Astrograph Sorcerer, the Starfrost Magician\", but it cannot activate its Pendulum Effects this turn. You can only use this effect of \"Astrograph Sorcerer, the Starfrost Magician\" once per turn.",
+        "monster_desc": "If a face-up Monster Card(s) you control is destroyed by battle or card effect: You can Special Summon this card from your hand, then you can Special Summon 1 of those destroyed monsters from your GY or face-up Extra Deck. During the Main Phase (Quick Effect): You can Tribute this card, then you can Fusion Summon 1 Dragon Fusion Monster from your Extra Deck, by shuffling its materials from your field and/or face-up Extra Deck into the Deck. You can only use each effect of \"Astrograph Sorcerer, the Starfrost Magician\" once per turn.",
+        "atk": 2500,
+        "def": 2000,
+        "level": 7,
+        "attribute": "DARK",
+        "archetype": "Magician",
+        "scale": 1,
+        "ygoprodeck_url": "https://ygoprodeck.com/card/astrograph-sorcerer-the-starfrost-magician-15563",
+        "card_sets": [
+          {
+            "set_name": "Magnificent Monsters",
+            "set_code": "MAMO-EN015",
+            "set_rarity": "Grand Master Rare",
+            "set_rarity_code": "",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Magnificent Monsters",
+            "set_code": "MAMO-EN015",
+            "set_rarity": "Starlight Rare",
+            "set_rarity_code": "(StR)",
+            "set_price": "0"
+          },
+          {
+            "set_name": "Magnificent Monsters",
+            "set_code": "MAMO-EN015",
+            "set_rarity": "Ultra Rare",
+            "set_rarity_code": "(UR)",
+            "set_price": "0"
+          }
+        ],
+        "card_images": [
+          {
+            "id": 48171151,
+            "image_url": "https://images.ygoprodeck.com/images/cards/48171151.jpg",
+            "image_url_small": "https://images.ygoprodeck.com/images/cards_small/48171151.jpg",
+            "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/48171151.jpg"
+          }
+        ],
+        "card_prices": [
+          {
+            "cardmarket_price": "0.00",
+            "tcgplayer_price": "0.00",
+            "ebay_price": "0.00",
+            "amazon_price": "0.00",
+            "coolstuffinc_price": "0.00"
+          }
+        ],
+        "desc_ko": "P스케일 1이 카드명의 펜듈럼 효과는 1턴에 1번밖에 사용할 수 없다.①: 자신 메인 페이즈에 발동할 수 있다. 이 카드를 파괴하고, 패 / 덱에서 \"성상의 마술사－아스트로그래프 매지션\" 이외의 펜듈럼 스케일이 1인 펜듈럼 몬스터 1장을 자신의 펜듈럼 존에 놓는다. 이 효과로 놓은 카드의 펜듈럼 효과는 이 턴에 발동할 수 없다.\n\n----------------------------------------\n\n마법사족          / 펜듈럼             / 효과      이 카드명의 ①②의 몬스터 효과는 각각 1턴에 1번밖에 사용할 수 없다.①: 자신 필드의 앞면 표시 몬스터 카드가 전투 / 효과로 파괴되었을 경우에 발동할 수 있다. 이 카드를 패에서 특수 소환한다. 그 후, 그 파괴된 몬스터 중 1장을 자신의 엑스트라 덱(앞면) / 묘지에서 특수 소환할 수 있다.②: 자신 / 상대의 메인 페이즈에 발동할 수 있다. 이 카드를 릴리스한다. 그 후, 자신의 엑스트라 덱(앞면) / 필드의 몬스터를 융합 소재로서 덱으로 되돌리고, 드래곤족인 융합 몬스터 1장을 융합 소환할 수 있다.",
+        "name_ko": "성상의 마술사-아스트로그래프 매지션",
+        "namuwiki_page": "성상의 마술사-아스트로그래프 매지션"
+      },
+      "lastAccessedAt": 1784603046487
     }
   }
 }

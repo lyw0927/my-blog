@@ -123,7 +123,7 @@ export default function WritePage() {
 
     try {
       const { url } = await uploadImage(file);
-      const backendBase = 'http://localhost:4000';
+      const backendBase = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000';
       const fullUrl = `${backendBase}${url}`;
       const markdownImg = `\n![이미지](${fullUrl})\n`;
 
@@ -162,7 +162,7 @@ export default function WritePage() {
     setUploadError('');
     try {
       const { url } = await uploadImage(file);
-      const backendBase = 'http://localhost:4000';
+      const backendBase = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000';
       const fullUrl = `${backendBase}${url}`;
       const markdownImg = `\n![이미지](${fullUrl})\n`;
       setContent((prev) => prev + markdownImg);
@@ -188,7 +188,7 @@ export default function WritePage() {
         setUploadError('');
         try {
           const { url } = await uploadImage(file);
-          const backendBase = 'http://localhost:4000';
+          const backendBase = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000';
           const fullUrl = `${backendBase}${url}`;
           const markdownImg = `\n![이미지](${fullUrl})\n`;
 
@@ -292,48 +292,7 @@ export default function WritePage() {
           {showBookmark && (
           <aside className={`${styles.bookmarkPanel} glass-panel`}>
             <h3 className={styles.bookmarkTitle}>📖 명령어 책갈피</h3>
-            
-            {/* 🔍 카드 검색 삽입 단축 도구 */}
-            <div className={styles.bookmarkGroup}>
-              <span className={styles.bookmarkGroupLabel}>🔍 카드 검색 삽입</span>
-              <input
-                type="text"
-                className={styles.cardSearchField}
-                placeholder="한글/영문 카드이름..."
-                value={cardSearchQuery}
-                onChange={(e) => setCardSearchQuery(e.target.value)}
-              />
-              {cardSearchResults.length > 0 && (
-                <div className={styles.searchResultsList}>
-                  {cardSearchResults.map((cardName) => (
-                    <button
-                      key={cardName}
-                      type="button"
-                      className={styles.searchResultBtn}
-                      onClick={() => {
-                        insertText(`[[${cardName}]]`);
-                        setCardSearchQuery('');
-                      }}
-                      title={KOREAN_CARD_MAP[cardName]}
-                    >
-                      {cardName}
-                    </button>
-                  ))}
-                </div>
-              )}
-              {cardSearchQuery && cardSearchResults.length === 0 && (
-                <button
-                  type="button"
-                  className={styles.bookmarkBtn}
-                  onClick={() => {
-                    insertText(`[[${cardSearchQuery}]]`);
-                    setCardSearchQuery('');
-                  }}
-                >
-                  "{cardSearchQuery}" 직접 삽입
-                </button>
-              )}
-            </div>
+
             
             <div className={styles.bookmarkGroup}>
                 <span className={styles.bookmarkGroupLabel}>덱 리스트 템플릿</span>
@@ -346,21 +305,7 @@ export default function WritePage() {
                 </button>
               </div>
 
-              <div className={styles.bookmarkGroup}>
-                <span className={styles.bookmarkGroupLabel}>자주 쓰는 카드 링크</span>
-                <div className={styles.cardBtnGrid}>
-                  {['조현의 마술사', '혜안의 마술사', '자독의 마술사', '홍채의 마술사', '아스트로그래프 마술사', '하루 우라라', '증식의 G', '무덤의 지명자', '말살의 지명자', '무한포영', '이펙트 뵐러', '원시생명체 니비루'].map(cardName => (
-                    <button
-                      key={cardName}
-                      type="button"
-                      className={styles.cardMiniBtn}
-                      onClick={() => insertText(`[[${cardName}]]`)}
-                    >
-                      {cardName.split(' ')[0]}
-                    </button>
-                  ))}
-                </div>
-              </div>
+
 
               <div className={styles.bookmarkGroup}>
                 <span className={styles.bookmarkGroupLabel}>마크다운 서식</span>
@@ -392,6 +337,50 @@ export default function WritePage() {
                   onDrop={handleDrop}
                   onPaste={handlePaste}
                 />
+
+                {/* ✍️ 카드 삽입 단축 도구 (Card Insertion Helper) */}
+                <div className={styles.cardHelperBar}>
+                  <span className={styles.helperLabel}>
+                    <span className="emoji-gray">🃏</span> 카드 삽입:
+                  </span>
+                  <input
+                    type="text"
+                    className={styles.helperSearchInput}
+                    placeholder="카드명 검색..."
+                    value={cardSearchQuery}
+                    onChange={(e) => setCardSearchQuery(e.target.value)}
+                  />
+                  {cardSearchQuery && (
+                    <div className={styles.helperResults}>
+                      {cardSearchResults.map((cardName) => (
+                        <button
+                          key={cardName}
+                          type="button"
+                          className={styles.helperResultBtn}
+                          onClick={() => {
+                            insertText(`[[${cardName}]]`);
+                            setCardSearchQuery('');
+                          }}
+                          title={KOREAN_CARD_MAP[cardName]}
+                        >
+                          {cardName}
+                        </button>
+                      ))}
+                      {cardSearchResults.length === 0 && (
+                        <button
+                          type="button"
+                          className={styles.helperResultBtn}
+                          onClick={() => {
+                            insertText(`[[${cardSearchQuery}]]`);
+                            setCardSearchQuery('');
+                          }}
+                        >
+                          "{cardSearchQuery}" 직접 삽입
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className={`${styles.previewPanel} glass-panel`}>

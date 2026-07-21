@@ -48,7 +48,35 @@ async function getRandomCardId() {
   return PRESETS[Math.floor(Math.random() * PRESETS.length)];
 }
 
+// Yugipedia MediaWiki API를 통해 영어 카드명을 한국어 공식 카드명으로 변환
+async function translateEnglishToKorean(englishName) {
+  if (!englishName) return null;
+  const formattedTitle = englishName.replace(/\s+/g, '_');
+  const url = `https://yugipedia.com/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=${encodeURIComponent(formattedTitle)}`;
+  
+  try {
+    const json = await fetchJson(url);
+    const pages = json.query?.pages;
+    if (!pages) return null;
+    const pageId = Object.keys(pages)[0];
+    if (pageId === '-1') return null;
+    const content = pages[pageId].revisions?.[0]?.['*'] || '';
+    
+    // ko_name 추출
+    const match = content.match(/\|\s*ko_name\s*=\s*(.*?)\n/i) ||
+                  content.match(/\|\s*ko_name\s*=\s*(.*?)\r\n/i);
+    if (match) {
+      return match[1].trim();
+    }
+  } catch (err) {
+    console.error('Yugipedia translation error for ' + englishName + ':', err.message);
+  }
+  return null;
+}
+
 module.exports = {
   fetchJson,
-  getRandomCardId
+  getRandomCardId,
+  translateEnglishToKorean
 };
+
