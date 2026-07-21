@@ -1,0 +1,11 @@
+name = "my-blog"
+compatibility_date = "2026-07-21"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "my-blog-db"
+database_id = "d1-database-uuid" # We can use a placeholder for now, local development creates its own DB.
+
+[[r2_buckets]]
+binding = "MY_BUCKET"
+bucket_name = "my-blog-uploads"
