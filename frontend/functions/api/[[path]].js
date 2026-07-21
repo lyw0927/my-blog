@@ -23,33 +23,46 @@ const JWT_DEFAULT_SECRET = 'my-blog-jwt-secret-key-12345';
 // Helper: Get authenticated user from request headers
 async function getAuthUser(c) {
   const authHeader = c.req.header('Authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
+  if (!authHeader) {
+    throw new Error('Authorization 헤더가 없습니다.');
+  }
+  if (!authHeader.startsWith('Bearer ')) {
+    throw new Error('Authorization 헤더 형식이 올바르지 않습니다. (Bearer 필수)');
+  }
   const token = authHeader.split(' ')[1];
+  if (!token) {
+    throw new Error('토큰 값이 비어 있습니다.');
+  }
+  const secret = c.env.JWT_SECRET || JWT_DEFAULT_SECRET;
   try {
-    const secret = c.env.JWT_SECRET || JWT_DEFAULT_SECRET;
     return await verify(token, secret);
   } catch (e) {
-    return null;
+    throw new Error(`토큰 검증 실패: ${e.message}`);
   }
 }
 
 // Middlewares
 const authMiddleware = async (c, next) => {
-  const user = await getAuthUser(c);
-  if (!user) {
-    return c.json({ message: '인증 권한이 없습니다. (토큰 없음 또는 만료됨)' }, 401);
+  try {
+    const user = await getAuthUser(c);
+    c.set('user', user);
+    await next();
+  } catch (err) {
+    return c.json({ message: `인증 권한이 없습니다. (${err.message})` }, 401);
   }
-  c.set('user', user);
-  await next();
 };
 
 const adminMiddleware = async (c, next) => {
-  const user = await getAuthUser(c);
-  if (!user || user.role !== 'admin') {
-    return c.json({ message: '관리자 권한이 필요합니다.' }, 403);
+  try {
+    const user = await getAuthUser(c);
+    if (!user || user.role !== 'admin') {
+      return c.json({ message: '관리자 권한이 필요합니다. (어드민 역할이 아님)' }, 403);
+    }
+    c.set('user', user);
+    await next();
+  } catch (err) {
+    return c.json({ message: `관리자 인증 실패: ${err.message}` }, 403);
   }
-  c.set('user', user);
-  await next();
 };
 
 // -------------------------------------------------------------
