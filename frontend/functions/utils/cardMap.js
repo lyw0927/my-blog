@@ -1,14 +1,12 @@
 export const KOREAN_CARD_MAP = {
-  // 마술사 핵심 덱 메인 몬스터 및 싱크로/엑시즈/링크
-  '천룡의 마술사': 'Dragonpit Magician',
+  '천룡의 마술사': 'Oafdragon Magician',
   '조현의 마술사': 'Harmonizing Magician',
   '자독의 마술사': 'Purple Poison Magician',
   '혜안의 마술사': 'Wisdom-Eye Magician',
   '홍채의 마술사': 'Double Iris Magician',
   '백익의 마술사': 'White Wing Magician',
   '흑아의 마술사': 'Black Fang Magician',
-  '홍귀의 마술사': 'Oafdragon Magician',
-  '각검의 마술사': 'Oafdragon Magician',
+  '각검의 마술사': 'Timebreaker Magician',
   '용혈의 마술사': 'Dragonpit Magician',
   '용맥의 마술사': 'Dragonpulse Magician',
   '아스트로그래프 마술사': 'Astrograph Sorcerer',
@@ -139,8 +137,10 @@ export const KOREAN_CARD_MAP = {
   '길항승부': 'Evenly Matched',
   '길항': 'Evenly Matched',
 
-  // 단축 약어 매핑
-  '천룡': 'Dragonpit Magician',
+  '천룡': 'Oafdragon Magician',
+  '용혈': 'Dragonpit Magician',
+  '용맥': 'Dragonpulse Magician',
+  '각검': 'Timebreaker Magician',
   '조현': 'Harmonizing Magician',
   '자독': 'Purple Poison Magician',
   '혜안': 'Wisdom-Eye Magician',
