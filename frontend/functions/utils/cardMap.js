@@ -32,8 +32,8 @@ export const KOREAN_CARD_MAP = {
   'EM 오드아이즈 싱크론': 'Performapal Odd-Eyes Synchron',
   'EM 오드아이즈 디졸버': 'Performapal Odd-Eyes Dissolver',
   '디졸버': 'Performapal Odd-Eyes Dissolver',
-  'EM 희대의 듀얼리스트': 'Performapal Gentrudo',
-  '희대의 듀얼리스트': 'Performapal Gentrudo',
+  'EM 희대의 듀얼리스트': 'Performapal Gentrude',
+  '희대의 듀얼리스트': 'Performapal Gentrude',
   '룡검사 라스터P': 'Luster Pendulum, the Dracoslayer',
   '라스터P': 'Luster Pendulum, the Dracoslayer',
   
@@ -92,8 +92,8 @@ export const KOREAN_CARD_MAP = {
   '암블로엘': 'Amphibious Swarmship Amblowhale',
   '에스:피 리틀나이트': 'S:P Little Knight',
   '리틀나이트': 'S:P Little Knight',
-  '크로노다이버 리도우': 'Chronodiver Redoer',
-  '리도우': 'Chronodiver Redoer',
+  '크로노다이버 리도우': 'Time Thief Redoer',
+  '리도우': 'Time Thief Redoer',
   '심연의 숨은 자': 'Abyss Dweller',
   '심연의 숨은자': 'Abyss Dweller',
   '네가로기어 아제우스': 'Divine Arsenal AA-ZEUS - Sky Thunder',
@@ -107,7 +107,7 @@ export const KOREAN_CARD_MAP = {
   '보텍스': 'Odd-Eyes Vortex Dragon',
   '오드아이즈 앱솔루트 드래곤': 'Odd-Eyes Absolute Dragon',
   '앱솔루트': 'Odd-Eyes Absolute Dragon',
-  '오드아이즈 싱크론': 'Odd-Eyes Synchron',
+  '오드아이즈 싱크론': 'Performapal Odd-Eyes Synchron',
 
   // 유희왕 필수 범용 패트랩 / 지명자 (Staples)
   '하루 우라라': 'Ash Blossom & Joyous Spring',
