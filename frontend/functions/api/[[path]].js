@@ -35,7 +35,7 @@ async function getAuthUser(c) {
   }
   const secret = c.env.JWT_SECRET || JWT_DEFAULT_SECRET;
   try {
-    return await verify(token, secret);
+    return await verify(token, secret, 'HS256');
   } catch (e) {
     throw new Error(`토큰 검증 실패: ${e.message}`);
   }
@@ -122,7 +122,7 @@ app.post('/auth/login', async (c) => {
     if (!username && password) {
       if (password === ADMIN_PASSWORD) {
         const payload = { username: 'admin', nickname: 'Sinji', role: 'admin', avatar: '76794549' };
-        const token = await sign(payload, secret);
+        const token = await sign(payload, secret, 'HS256');
         return c.json({ token, role: 'admin', nickname: 'Sinji', avatar: '76794549' });
       } else {
         return c.json({ message: '비밀번호가 올바르지 않습니다.' }, 401);
@@ -139,7 +139,7 @@ app.post('/auth/login', async (c) => {
     if (cleanedUsername === 'admin') {
       if (password === ADMIN_PASSWORD) {
         const payload = { username: 'admin', nickname: 'Sinji', role: 'admin', avatar: '76794549' };
-        const token = await sign(payload, secret);
+        const token = await sign(payload, secret, 'HS256');
         return c.json({ token, role: 'admin', nickname: 'Sinji', avatar: '76794549' });
       } else {
         return c.json({ message: '관리자 비밀번호가 올바르지 않습니다.' }, 401);
@@ -160,7 +160,7 @@ app.post('/auth/login', async (c) => {
     }
 
     const payload = { username: user.username, nickname: user.nickname, role: user.role, avatar: user.avatar || '48171151' };
-    const token = await sign(payload, secret);
+    const token = await sign(payload, secret, 'HS256');
     return c.json({ token, role: user.role, nickname: user.nickname, avatar: user.avatar || '48171151' });
   } catch (err) {
     return c.json({ message: err.message }, 500);
