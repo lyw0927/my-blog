@@ -429,3 +429,15 @@
   background: rgba(239, 68, 68, 0.08);
 }
 
+.rootCommentItem {
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rootCommentItem:hover {
+  background-color: rgba(99, 102, 241, 0.04);
+  border-color: rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.05);
+}
+
+
