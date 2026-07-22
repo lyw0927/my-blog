@@ -82,7 +82,7 @@ export const likePost = (id) =>
 // 댓글 목록
 export const getComments = (postId) => request(`/posts/${postId}/comments`);
 
-// 댓글 작성
+// 댓글 작성 (parentId 옵션으로 대댓글 지원)
 export const createComment = (postId, data) =>
   request(`/posts/${postId}/comments`, { method: 'POST', body: JSON.stringify(data) });
 

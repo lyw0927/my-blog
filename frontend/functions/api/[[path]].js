@@ -456,7 +456,8 @@ app.get('/posts/:postId/comments', async (c) => {
       author: row.author,
       content: row.content,
       avatar: row.avatar,
-      createdAt: row.createdAt
+      createdAt: row.createdAt,
+      parentId: row.parentId || null
     }));
 
     return c.json(comments);
@@ -469,7 +470,7 @@ app.get('/posts/:postId/comments', async (c) => {
 app.post('/posts/:postId/comments', async (c) => {
   try {
     const postId = c.req.param('postId');
-    const { author, content, password, avatar } = await c.req.json();
+    const { author, content, password, avatar, parentId } = await c.req.json();
 
     if (!author || !content || !password) {
       return c.json({ message: 'author, content, password 는 필수입니다.' }, 400);
@@ -483,6 +484,16 @@ app.post('/posts/:postId/comments', async (c) => {
       return c.json({ message: '게시글을 찾을 수 없습니다.' }, 404);
     }
 
+    // parentId가 주어졌으면 부모 댓글 존재 여부 검증
+    if (parentId) {
+      const parent = await c.env.DB.prepare('SELECT id FROM comments WHERE id = ? AND postId = ?')
+        .bind(parentId, postId)
+        .first();
+      if (!parent) {
+        return c.json({ message: '부모 댓글을 찾을 수 없습니다.' }, 404);
+      }
+    }
+
     let finalAvatar = avatar;
     if (!finalAvatar) {
       finalAvatar = await getRandomCardId();
@@ -494,9 +505,9 @@ app.post('/posts/:postId/comments', async (c) => {
     const nowStr = new Date().toISOString();
 
     await c.env.DB.prepare(
-      'INSERT INTO comments (id, postId, author, content, avatar, passwordHash, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?)'
+      'INSERT INTO comments (id, postId, author, content, avatar, passwordHash, createdAt, parentId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
     )
-      .bind(id, postId, author, content, finalAvatar, passwordHash, nowStr)
+      .bind(id, postId, author, content, finalAvatar, passwordHash, nowStr, parentId || null)
       .run();
 
     return c.json({ id }, 201);
@@ -575,6 +586,8 @@ app.delete('/posts/:postId/comments/:commentId', async (c) => {
       }
     }
 
+    // 부모 댓글 삭제 시 자식 대댓글도 함께 삭제
+    await c.env.DB.prepare('DELETE FROM comments WHERE parentId = ?').bind(commentId).run();
     await c.env.DB.prepare('DELETE FROM comments WHERE id = ?').bind(commentId).run();
     return c.json({ message: '댓글이 성공적으로 삭제되었습니다.' });
   } catch (err) {
