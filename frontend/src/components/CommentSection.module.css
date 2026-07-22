@@ -334,3 +334,98 @@
   font-size: 0.9rem;
   color: var(--text-main);
 }
+
+/* 대댓글 관련 스타일 */
+.commentThread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.replyList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-left: 2px solid var(--panel-border);
+  padding-left: 1rem;
+}
+
+.replyItem {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(99, 102, 241, 0.02) !important;
+  border-color: rgba(99, 102, 241, 0.12) !important;
+}
+
+.replyIndicator {
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.1rem;
+  align-self: flex-start;
+  margin-top: 0.1rem;
+  margin-right: 0.25rem;
+  opacity: 0.8;
+}
+
+.commentBody {
+  flex: 1;
+}
+
+.replyBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.replyBtn:hover {
+  color: var(--secondary);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.replyForm {
+  background: rgba(31, 41, 55, 0.3);
+  border: 1px dashed var(--panel-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-left: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: slideDown 0.2s ease;
+}
+
+.replyFormHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.replyingTo {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.cancelReplyBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+.cancelReplyBtn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
