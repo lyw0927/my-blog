@@ -1,0 +1,72 @@
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.25rem 0.35rem;
+  vertical-align: middle;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+}
+
+.wrapper:hover {
+  transform: translateY(-4px) scale(1.05);
+  filter: drop-shadow(0 6px 12px rgba(99, 102, 241, 0.35));
+}
+
+.cardImg {
+  width: 72px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.2s ease;
+}
+
+.wrapper:hover .cardImg {
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+
+.label {
+  display: block;
+  max-width: 80px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.skeleton {
+  display: inline-block;
+  width: 72px;
+  height: 105px;
+  border-radius: 4px;
+  background: linear-gradient(110deg, rgba(99, 102, 241, 0.08) 30%, rgba(99, 102, 241, 0.18) 50%, rgba(99, 102, 241, 0.08) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.fallbackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--primary);
+  font-weight: 700;
+  border-bottom: 1px dashed var(--primary);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.fallbackLink:hover {
+  color: var(--accent);
+  border-bottom-style: solid;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './MarkdownRenderer.module.css';
 import { KOREAN_CARD_MAP } from '../utils/cardMap';
 import DeckListRenderer from './DeckListRenderer';
+import InlineCardImage from './InlineCardImage';
 
 export default function MarkdownRenderer({ content }) {
   if (!content) return null;
@@ -123,7 +124,7 @@ export default function MarkdownRenderer({ content }) {
     groupedBlocks.push(currentGroup);
   }
 
-  const parseInline = (text) => {
+  const parseInlineHtml = (text) => {
     if (!text) return '';
     let html = text
       .replace(/&/g, '&amp;')
@@ -147,48 +148,72 @@ export default function MarkdownRenderer({ content }) {
     // Links
     html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="md-link">$1</a>');
 
-    // Card Tooltips: [[카드이름]] 또는 [[영어카드명|한글표시명]]
-    html = html.replace(/\[\[(.*?)\]\]/g, (match, innerText) => {
-      let cardName = innerText.trim();
-      let displayName = cardName;
-
-      // 파이프(|) 구분자가 있는 경우 처리
-      if (innerText.includes('|')) {
-        const parts = innerText.split('|');
-        const first = parts[0].trim();
-        const second = parts[1].trim();
-
-        const translatedFirst = KOREAN_CARD_MAP[first];
-        const translatedSecond = KOREAN_CARD_MAP[second];
-
-        if (translatedFirst) {
-          cardName = translatedFirst;
-          displayName = second;
-        } else if (translatedSecond) {
-          cardName = translatedSecond;
-          displayName = first;
-        } else {
-          // 둘 다 사전에 없는 경우, 한글이 섞인 쪽을 표시명, 영문만 있는 쪽을 API용 이름으로 판정
-          const hasKorean = (str) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(str);
-          if (hasKorean(first) && !hasKorean(second)) {
-            cardName = second;
-            displayName = first;
-          } else {
-            cardName = first;
-            displayName = second;
-          }
-        }
-      } else {
-        cardName = KOREAN_CARD_MAP[cardName] || cardName;
-      }
-
-      return `<a class="card-tooltip-trigger" href="https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&keyword=${encodeURIComponent(displayName)}&stype=1&request_locale=ko" target="_blank" rel="noopener noreferrer" data-card-name="${cardName}" style="color: var(--primary); font-weight: 700; border-bottom: 1px dashed var(--primary); cursor: pointer; text-decoration: none;">${displayName}</a>`;
-    });
-
     // 엔터키(줄바꿈)가 실제 브라우저 화면 상에서도 줄바꿈(<br>)으로 렌더링되도록 개행 문자 변환
     html = html.replace(/\n/g, '<br />');
 
-    return <span dangerouslySetInnerHTML={{ __html: html }} />;
+    return html;
+  };
+
+  const resolveCardName = (innerText) => {
+    let cardName = innerText.trim();
+    let displayName = cardName;
+
+    if (innerText.includes('|')) {
+      const parts = innerText.split('|');
+      const first = parts[0].trim();
+      const second = parts[1].trim();
+
+      const translatedFirst = KOREAN_CARD_MAP[first];
+      const translatedSecond = KOREAN_CARD_MAP[second];
+
+      if (translatedFirst) {
+        cardName = translatedFirst;
+        displayName = second;
+      } else if (translatedSecond) {
+        cardName = translatedSecond;
+        displayName = first;
+      } else {
+        const hasKorean = (str) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(str);
+        if (hasKorean(first) && !hasKorean(second)) {
+          cardName = second;
+          displayName = first;
+        } else {
+          cardName = first;
+          displayName = second;
+        }
+      }
+    } else {
+      cardName = KOREAN_CARD_MAP[cardName] || cardName;
+    }
+
+    return { cardName, displayName };
+  };
+
+  const parseInline = (text) => {
+    if (!text) return null;
+
+    // [[...]] 패턴을 기준으로 텍스트를 분할하여 React 컴포넌트와 HTML을 혼합 렌더링
+    const parts = text.split(/(\[\[.*?\]\])/g);
+    if (parts.length === 1) {
+      // [[...]] 패턴이 없으면 기존 HTML 렌더링
+      return <span dangerouslySetInnerHTML={{ __html: parseInlineHtml(text) }} />;
+    }
+
+    return (
+      <span>
+        {parts.map((part, i) => {
+          const cardMatch = part.match(/^\[\[(.*?)\]\]$/);
+          if (cardMatch) {
+            const { cardName, displayName } = resolveCardName(cardMatch[1]);
+            return <InlineCardImage key={i} cardName={cardName} displayName={displayName} />;
+          }
+          if (part) {
+            return <span key={i} dangerouslySetInnerHTML={{ __html: parseInlineHtml(part) }} />;
+          }
+          return null;
+        })}
+      </span>
+    );
   };
 
   return (
