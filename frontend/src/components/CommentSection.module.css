@@ -429,15 +429,44 @@
   background: rgba(239, 68, 68, 0.08);
 }
 
-.rootCommentItem {
+/* 대댓글 박스 속의 박스 구조 개편 */
+.threadContainer {
+  list-style: none;
+  background: var(--hover-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.rootCommentItem:hover {
-  background-color: rgba(99, 102, 241, 0.04);
-  border-color: rgba(99, 102, 241, 0.2);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.05);
+.threadContainer:hover {
+  background-color: rgba(99, 102, 241, 0.03);
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.06);
 }
 
+.rootCommentBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
+.replyItem {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(31, 41, 55, 0.45) !important;
+  border: 1px solid var(--panel-border) !important;
+  border-radius: 8px !important;
+  padding: 0.875rem 1rem !important;
+  cursor: default;
+  transition: transform 0.15s ease;
+}
+
+.replyItem:hover {
+  transform: translateX(2px);
+}

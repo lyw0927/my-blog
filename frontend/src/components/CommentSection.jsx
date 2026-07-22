@@ -198,7 +198,7 @@ export default function CommentSection({ postId, comments, onCommentAdded }) {
     }
   }
 
-  // 단일 댓글 렌더링
+  // 단일 댓글/대댓글 렌더링
   const renderComment = (c, isReply = false) => {
     const handleItemClick = (e) => {
       // 대댓글이 아닌 일반 부모 댓글일 때만 답글 폼 오픈 지원
@@ -212,43 +212,66 @@ export default function CommentSection({ postId, comments, onCommentAdded }) {
       }
     };
 
-    return (
-      <li 
-        key={c.id} 
-        className={`${styles.item} ${isReply ? styles.replyItem : styles.rootCommentItem}`}
-        onClick={handleItemClick}
-      >
-        {isReply && <div className={styles.replyIndicator}>↳</div>}
-        <div className={styles.commentBody}>
-          <div className={styles.commentHeader}>
-            <div className={styles.commentMeta} onClick={(e) => e.stopPropagation()}>
-              <div className={styles.commentAvatarWrapper}>
-                <img
-                  src={`https://images.ygoprodeck.com/images/cards_cropped/${c.avatar || '48171151'}.jpg`}
-                  alt="profile icon"
-                  className={styles.commentAvatar}
-                />
+    if (isReply) {
+      return (
+        <li key={c.id} className={styles.replyItem}>
+          <div className={styles.replyIndicator}>↳</div>
+          <div className={styles.commentBody}>
+            <div className={styles.commentHeader}>
+              <div className={styles.commentMeta} onClick={(e) => e.stopPropagation()}>
+                <div className={styles.commentAvatarWrapper}>
+                  <img
+                    src={`https://images.ygoprodeck.com/images/cards_cropped/${c.avatar || '48171151'}.jpg`}
+                    alt="profile icon"
+                    className={styles.commentAvatar}
+                  />
+                </div>
+                <span className={styles.commentAuthor}>{c.author}</span>
+                <span className={styles.commentDate}>{formatCommentDate(c.createdAt)}</span>
               </div>
-              <span className={styles.commentAuthor}>{c.author}</span>
-              <span className={styles.commentDate}>{formatCommentDate(c.createdAt)}</span>
-            </div>
-            <div className={styles.commentActions} onClick={(e) => e.stopPropagation()}>
-              {!isReply && (
-                <button className={styles.replyBtn} onClick={() => openReplyForm(c)} aria-label="Reply">
-                  {commentLabels.reply}
+              <div className={styles.commentActions} onClick={(e) => e.stopPropagation()}>
+                <button className={styles.editBtn} onClick={() => openEditModal(c)} aria-label="Edit comment">
+                  {commentLabels.edit}
                 </button>
-              )}
-              <button className={styles.editBtn} onClick={() => openEditModal(c)} aria-label="Edit comment">
-                {commentLabels.edit}
-              </button>
-              <button className={styles.deleteBtn} onClick={() => openDeleteModal(c)} aria-label="Delete comment">
-                {commentLabels.delete}
-              </button>
+                <button className={styles.deleteBtn} onClick={() => openDeleteModal(c)} aria-label="Delete comment">
+                  {commentLabels.delete}
+                </button>
+              </div>
             </div>
+            <p className={styles.commentContent}>{c.content}</p>
           </div>
-          <p className={styles.commentContent}>{c.content}</p>
+        </li>
+      );
+    }
+
+    return (
+      <div className={styles.rootCommentBody} onClick={handleItemClick}>
+        <div className={styles.commentHeader}>
+          <div className={styles.commentMeta} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.commentAvatarWrapper}>
+              <img
+                src={`https://images.ygoprodeck.com/images/cards_cropped/${c.avatar || '48171151'}.jpg`}
+                alt="profile icon"
+                className={styles.commentAvatar}
+              />
+            </div>
+            <span className={styles.commentAuthor}>{c.author}</span>
+            <span className={styles.commentDate}>{formatCommentDate(c.createdAt)}</span>
+          </div>
+          <div className={styles.commentActions} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.replyBtn} onClick={() => openReplyForm(c)} aria-label="Reply">
+              {commentLabels.reply}
+            </button>
+            <button className={styles.editBtn} onClick={() => openEditModal(c)} aria-label="Edit comment">
+              {commentLabels.edit}
+            </button>
+            <button className={styles.deleteBtn} onClick={() => openDeleteModal(c)} aria-label="Delete comment">
+              {commentLabels.delete}
+            </button>
+          </div>
         </div>
-      </li>
+        <p className={styles.commentContent}>{c.content}</p>
+      </div>
     );
   };
 
@@ -259,7 +282,7 @@ export default function CommentSection({ postId, comments, onCommentAdded }) {
       {/* 댓글 목록 (트리 구조) */}
       <ul className={styles.list}>
         {rootComments.map((c) => (
-          <div key={c.id} className={styles.commentThread}>
+          <li key={c.id} className={styles.threadContainer}>
             {renderComment(c, false)}
 
             {/* 대댓글 목록 */}
@@ -271,7 +294,7 @@ export default function CommentSection({ postId, comments, onCommentAdded }) {
 
             {/* 대댓글 작성 폼 */}
             {replyTo && replyTo.id === c.id && (
-              <form onSubmit={handleReplySubmit} className={styles.replyForm}>
+              <form onSubmit={handleReplySubmit} className={styles.replyForm} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.replyFormHeader}>
                   <span className={styles.replyingTo}>↳ <strong>{replyTo.author}</strong>에게 답글</span>
                   <button type="button" className={styles.cancelReplyBtn} onClick={closeReplyForm}>✕</button>
@@ -328,7 +351,7 @@ export default function CommentSection({ postId, comments, onCommentAdded }) {
                 </div>
               </form>
             )}
-          </div>
+          </li>
         ))}
         {comments.length === 0 && <li className={styles.empty}>{commentLabels.empty}</li>}
       </ul>
